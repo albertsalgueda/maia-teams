@@ -1,8 +1,0 @@
-ASSISTANT: Alright, let's get started! What kind of graphs do you want the chatbot to be able to create?
-ASSISTANT: The chatbot should be able to create various types of graphs including line graphs, scatter plots, bar charts, pie charts, and histograms. The user should be able to specify the type of graph they want to create based on their data. Additionally, the chatbot should be able to handle different types of data including numerical, categorical, or a combination of both.
-ASSISTANT: Got it! To build this chatbot, we'll need to use the following libraries:
-
-- Pandas to manipulate and process the data.
-- Matplotlib to create the graphs.
-
-Do you want me to take care of writing the code or do you want to do it?
