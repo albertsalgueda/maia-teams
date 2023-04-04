@@ -35,7 +35,7 @@ openai.api_key = os.getenv("OPENAI_API_KEY")
 
 SYSTEM_TEXT = f"""
 You are a one of a pair of ChatGPT instances, tasked with building {PROJECT} in python.
- One of you will be the programmer, the other being the product owner. Code blocks will only be present in the most recent messages.
+ Code blocks will only be present in the most recent messages.
  Make sure your code has a `main` function. Keep your messages concise, there's no need for pleasantries.
  The product owner can at any point respond "KeywordDone" to indicate that you are finished or respond "KeywordTest" to test run your code
  with a tester AI. After testing, continue iterating based on the testers results until time runs out or
@@ -67,10 +67,11 @@ def main():
     program = {}  # global scope containing class and function definitions
 
     print("Starting Maia Teams!")
+    o = input("Explain the app that you would like to develop: ")
     convo = []
     for i in range(MAX_CONVO):
         convo = product_owner(convo)
-        print_message(convo[-1], "PRODUCT OWNER")
+        print_message(convo[-1], "TECHNICAL PRODUCT MANAGER")
         if "keywordtest" in convo[-1]["content"].lower():
             test_result = run_program(program)
             convo.append({
@@ -84,7 +85,7 @@ def main():
         
         # programmers turn
         convo = programmer(convo)
-        print_message(convo[-1], "PROGRAMMER")
+        print_message(convo[-1], "ROCKSTAR DEVELOPER")
         adjust_program(program, convo[-1]["content"])
         if len(convo) >= 4:
             convo[-3]["content"] = remove_code(convo[-3]["content"])
@@ -107,7 +108,10 @@ def adjust_program(program: dict, content: str):
     if code:
         for codeblock in code.groups():
             # TODO: Return any syntax errors here to the programmer
-            exec(codeblock, program)
+            try:
+                exec(codeblock, program)
+            except:
+                print("There was an error running the code!")
     else:
         return  # no code in message
     

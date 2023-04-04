@@ -3,8 +3,9 @@ from typing import Dict, List
 
 MODEL = "gpt-3.5-turbo"
 Conversation = List[Dict[str, str]]
-PROJECT = "A program to control stock using bar codes"
-PROJECT_NAME = "stock_control"
+
+PROJECT = "script to connect tinder chats to gpt4"
+PROJECT_NAME = "tinder-gpt4"
 
 def print_message(message: Dict[str, str], role: str = None):
     write_message(message, role)
